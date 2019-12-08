@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block cores %}
+    <div class="col-md-12">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img class="d-block w-100" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRmZJ_TSszMdHhkmH69--slj4OkkvZpVF0IP3nUWpnzgW5Fcm4-" alt="First slide">
+            </div>
+              <div class="carousel-item">
+              <img class="d-block w-100" src="https://www.cineplexbd.com/uploads/slider/No-Dorai-Web-Banner.jpg" alt="First slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQUXpZtd0LwE-c5JyHFz4nW7U2yI8j25mKDmYIhbeHs--Y2POSC" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQR84VG7zW-DXHYTTZDSl5SFVRyYmK7lMEfqUZARVYk9FlxCp4v" alt="Third slide">
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="col-md-8 col-12 text-center mood-font mt-4">
+        <p ><code>Movies</code> will recommend movie based on your mood</p>
+        <p style="margin-top: -15px;">or</p>
+        <p style="margin-top: -15px;">You can browser movies by your favourite genre.</p>
+    </div>
+
+    <div class="col-md-6 col-12 mt-5 mb-5 mood-font">
+        <div class="float-left ">
+            <button class="btn btn-outline-dark btn-lg" type="button" data-toggle="modal" data-target="#exampleModalCenter">Select by mood</button>
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Select your mood?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                    <form id="mood" action="." method="post">
+                        {% csrf_token %}
+                          <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row justify-content-center modal-font">
+                                    <div class="col-6">
+                                        <label for="happy">
+                                            <input id="happy" type="radio" name="emotion" value="happy" required> Happy
+                                        </label>
+                                    </div>
+                                    <div class="col-6 float-left">
+                                        <label for="romantic">
+                                            <input id="romantic" type="radio" name="emotion" value="romantic"> Romantic
+                                        </label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label for="lonely">
+                                            <input id="lonely" type="radio" name="emotion" value="lonely"> Lonely
+                                        </label>
+                                    </div>
+                                    <div class="col-6 float-left">
+                                        <label for="exhausted">
+                                            <input id="exhausted" type="radio" name="emotion" value="exhausted"> Tried
+                                        </label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label for="angry">
+                                            <input id="angry" type="radio" name="emotion" value="angry"> Angry
+                                        </label>
+                                    </div>
+
+                                    <div class="col-6 float-left">
+                                         <label for="upset">
+                                            <input id="upset" type="radio" name="emotion" value="upset"> Upset
+                                        </label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label for="sick">
+                                            <input id="sick" type="radio" name="emotion" value="sick"> Sick
+                                        </label>
+                                    </div>
+
+                                    <div class="col-6 float-left">
+                                        <label for="lonely-midnight">
+                                            <input id="lonely-midnight"  type="radio" name="emotion" value="lonely-midnight"> Lonely Midnight
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                          </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="float-right">
+            <button class="btn btn-outline-dark btn-lg" type="button" data-toggle="modal" data-target="#exampleModalCenter1">Select by genre</button>
+            <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle1">Select favourite genre?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+
+
+
+                    <form id="genre" action="." method="post">
+                        {% csrf_token %}
+                      <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row justify-content-center modal-font">
+                                <div class="col-6">
+                                    <label for="animation">
+                                        <input id="animation" type="checkbox" name="genre" value="animation" > Animation
+                                    </label>
+                                </div>
+                                <div class="col-6 float-left">
+                                    <label for="adventure">
+                                        <input id="adventure" type="checkbox" name="genre" value="adventure"> Adventure
+                                    </label>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="comedy">
+                                        <input id="comedy" type="checkbox" name="genre" value="comedy"> Comedy
+                                    </label>
+                                </div>
+                                <div class="col-6 float-left">
+                                    <label for="crime">
+                                        <input id="crime" type="checkbox" name="genre" value="crime"> Crime
+                                    </label>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="drama">
+                                        <input id="drama" type="checkbox" name="genre" value="drama"> Drama
+                                    </label>
+                                </div>
+
+                                <div class="col-6 float-left">
+                                     <label for="fantasy">
+                                        <input id="fantasy" type="checkbox" name="genre" value="fantasy"> Fantasy
+                                    </label>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="horror">
+                                        <input id="horror" type="checkbox" name="genre" value="horror"> Horror
+                                    </label>
+                                </div>
+
+                                <div class="col-6 float-left">
+                                    <label for="mystery">
+                                        <input id="mystery" type="checkbox" name="genre" value="mystery"> Mystery
+                                    </label>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="romance">
+                                        <input id="romance" type="checkbox" name="genre" value="romance"> Romance
+                                    </label>
+                                </div>
+
+                                <div class="col-6 float-left">
+                                    <label for="si-fi">
+                                        <input id="si-fi" type="checkbox" name="genre" value="si-fi"> Si-Fi
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
