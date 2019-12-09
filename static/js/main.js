@@ -2,7 +2,6 @@
 $(document).ready(function() {
 
     $("#mood").on('submit', function(event) {
-
         event.preventDefault();
         let emotion;
         emotion = $("input[name='emotion']:checked").val();
@@ -28,7 +27,7 @@ $(document).ready(function() {
 
 
 
-            var xhttp = new XMLHttpRequest();
+            let xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     document.getElementById("listDiv").innerHTML = this.responseText;
@@ -42,33 +41,68 @@ $(document).ready(function() {
     });
 
 
-    $("#genre").on('submit',function(event) {
+    $("#genre").on('submit', function(event) {
         event.preventDefault();
-        let genres = [];
+        let genre;
+        genre = $("input[name='genre']:checked").val();
+        console.log('You entered ' + genre);
 
-        $.each($("input[name='genre']:checked"), function(){
-            genres.push($(this).val());
-        });
-
-        console.log('selected genres: ' + genres.join(", "));
         $('#exampleModalCenter1').modal('toggle');
 
-        if (genres === []) {
-            alert('Empty form submitted.')
-        } else {
 
-            $.ajax({
-                type: 'POST',
-                url: '',
-                data: {
-                    name: 'genre',
-                    genre: JSON.stringify(genres),
-                    csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
-                },
-                success: function () {
-                    console.log('genres submitted ;)');
+        $.ajax( {
+           type: 'POST',
+           url: '',
+            data: {
+               name: 'genre',
+               emotion: genre,
+               csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+           },
+            success:function () {
+               console.log('mood submitted ;)');
+            }
+        });
+
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("listDiv").innerHTML = this.responseText;
                 }
-            });
-        }
+            };
+            xhttp.open("GET", 'result', true );
+            xhttp.send();
+
     });
+
 });
+
+
+// $("#genre").on('submit',function(event) {
+    //     event.preventDefault();
+    //     let genres = [];
+    //
+    //     $.each($("input[name='genre']:checked"), function(){
+    //         genres.push($(this).val());
+    //     });
+    //
+    //     console.log(genres.length + 'selected genres: ' + genres.join(", "));
+    //
+    //     $('#exampleModalCenter1').modal('toggle');
+    //     if (genres.length < 1) {
+    //         alert('Empty form submitted.')
+    //     } else {
+    //         console.log(genres.length);
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '',
+    //             data: {
+    //                 name: 'genre',
+    //                 genre: JSON.stringify(genres),
+    //                 csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+    //             },
+    //             success: function () {
+    //                 console.log('genres submitted ;)');
+    //             }
+    //         });
+    //     }
+    // });

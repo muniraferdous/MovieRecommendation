@@ -4,39 +4,38 @@ import json
 
 from .movie import build_chart
 from .models import MovieSuggest
+from .retrieve_genre import retrieve_genre
 
 
 def home_view(request):
     if request.is_ajax():
         if request.method == 'POST':
             name = request.POST['name']
-            # data = []
-            # titles = []
-            # years = []
-            # imdb_ids = []
-            # poster_paths = []
-            # dic = {}
             if name == 'emotion':
                 datas = request.POST['emotion']
-                obj = MovieSuggest(mood=datas)
+                obj = MovieSuggest(genre_mood='mood', item=datas)
                 obj.save()
             else:
-                genres = request.POST['genre']
-                data = json.loads(genres)
-                result = build_chart(data[0])
-                title = result['title'][0]
-                print(data[0])
-
+                genres = request.POST['emotion']
+                # data = json.loads(genres)
+                # print(len(data))
+                obj = MovieSuggest(genre_mood='genre', item=genres)
+                obj.save()
+                # if len(data):
+                #     obj = MovieSuggest(mood=data)
+                #     obj.save()
             return HttpResponse("ok")
     return render(request, 'home.html', {})
 
 
 def result_view(request):
     qs = MovieSuggest.objects.last()
-    print(qs.mood)
+    print(qs.genre_mood)
 
-    result = build_chart('Romantic')
-
+    if qs.genre_mood == 'mood':
+        qs.item = retrieve_genre(qs.item)
+    print(qs.item.title())
+    result = build_chart(qs.item.title())
     titles = []
     years = []
     imdb_ids = []
@@ -62,9 +61,6 @@ def result_view(request):
             'imdb_id': imdb_ids[i],
             'poster_path': poster_paths[i],
         }
-    # data = json.dumps(dic)
-    # print(data)
-    # return JsonResponse(data)
 
     context = {
         'dic': dic

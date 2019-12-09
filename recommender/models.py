@@ -2,11 +2,8 @@ from django.db import models
 
 
 class MovieSuggest(models.Model):
-    # title = models.CharField(max_length=255)
-    # year = models.CharField(max_length=4)
-    # imdb_id = models.CharField(max_length=55)
-    # poster_path = models.CharField(max_length=2055)
-    mood = models.CharField(max_length=55)
+    genre_mood = models.CharField(max_length=55)
+    item = models.CharField(max_length=1055)
 
     def __str__(self):
-        return self.mood
+        return self.genre_mood
