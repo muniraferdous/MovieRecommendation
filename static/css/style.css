@@ -44,7 +44,7 @@ ul li a {
 
 }
  ul li a:hover{
-     transform: scale(1.2);
+     transform: scale(1.1);
  }
 
 .carousel-item img {
